@@ -36,13 +36,28 @@ password_entry = tk.Entry(
     highlightthickness=2, highlightbackground=FIELD, highlightcolor=ACCENT,
 )
 password_entry.pack(pady=5, ipady=6)
+def show_welcome(username):
+    card.destroy()
+    welcome_card = tk.Frame(window, bg=CARD, padx=30, pady=25)
+    welcome_card.pack(pady=40)
+
+    welcome_label = tk.Label(
+        welcome_card, text="Welcome, " + username + "!",
+        font=("Arial", 18, "bold"), bg=CARD, fg=ACCENT,
+    )
+    welcome_label.pack(pady=10)
+
+    info_label = tk.Label(
+        welcome_card, text="Login successful", font=("Arial", 12), bg=CARD, fg=TEXT,
+    )
+    info_label.pack()
 def login():
     username = name_entry.get()
     password = password_entry.get()
     if username == "" or password == "":
         message_label.config(text="Please enter username and password")
     else:
-        message_label.config(text="Login clicked!")
+                show_welcome(username)
 
 login_button = tk.Button(
     card, text="Login", font=("Arial", 12, "bold"), width=20,
