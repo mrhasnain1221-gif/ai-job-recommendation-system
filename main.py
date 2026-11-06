@@ -51,6 +51,60 @@ def show_welcome(username):
         welcome_card, text="Login successful", font=("Arial", 12), bg=CARD, fg=TEXT,
     )
     info_label.pack()
+    degree_label = tk.Label(welcome_card, text="Degree:", font=("Arial", 12), bg=CARD, fg=TEXT)
+    degree_label.pack(anchor="w", pady=(15, 0))
+
+    degree_entry = tk.Entry(
+        welcome_card, width=35, font=("Arial", 12),
+        bg=FIELD, fg=TEXT, insertbackground=TEXT, relief="flat",
+        highlightthickness=2, highlightbackground=FIELD, highlightcolor=ACCENT,
+    )
+    degree_entry.pack(pady=5, ipady=6)
+    skills_label = tk.Label(
+        welcome_card, text="Skills (separate with commas):",
+        font=("Arial", 12), bg=CARD, fg=TEXT,
+    )
+    skills_label.pack(anchor="w", pady=(10, 0))
+
+    skills_entry = tk.Entry(
+        welcome_card, width=35, font=("Arial", 12),
+        bg=FIELD, fg=TEXT, insertbackground=TEXT, relief="flat",
+        highlightthickness=2, highlightbackground=FIELD, highlightcolor=ACCENT,
+    )
+    skills_entry.pack(pady=5, ipady=6)
+    interest_label = tk.Label(
+        welcome_card, text="Interest (e.g. Data Science):",
+        font=("Arial", 12), bg=CARD, fg=TEXT,
+    )
+    interest_label.pack(anchor="w", pady=(10, 0))
+
+    interest_entry = tk.Entry(
+        welcome_card, width=35, font=("Arial", 12),
+        bg=FIELD, fg=TEXT, insertbackground=TEXT, relief="flat",
+        highlightthickness=2, highlightbackground=FIELD, highlightcolor=ACCENT,
+    )
+    interest_entry.pack(pady=5, ipady=6)
+    def save_profile():
+        degree = degree_entry.get()
+        skills = skills_entry.get()
+        interest = interest_entry.get()
+        if degree == "" or skills == "" or interest == "":
+            profile_message.config(text="Please fill all fields")
+        else:
+            profile_message.config(text="Profile saved!")
+            print("Degree:", degree)
+            print("Skills:", skills)
+            print("Interest:", interest)
+
+    save_button = tk.Button(
+        welcome_card, text="Save Profile", font=("Arial", 12, "bold"), width=20,
+        bg=ACCENT, fg="#070708", activebackground=FIELD, activeforeground=TEXT,
+        relief="flat", cursor="hand2", command=save_profile,
+    )
+    save_button.pack(pady=(15, 5), ipady=4)
+
+    profile_message = tk.Label(welcome_card, text="", font=("Arial", 10), bg=CARD, fg=TEXT)
+    profile_message.pack()
 def login():
     username = name_entry.get()
     password = password_entry.get()
