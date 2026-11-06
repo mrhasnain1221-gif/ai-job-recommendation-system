@@ -1,4 +1,6 @@
 import tkinter as tk
+import json
+import os
 
 # Theme colors
 BG = "#135C3A"       # window background
@@ -91,10 +93,16 @@ def show_welcome(username):
         if degree == "" or skills == "" or interest == "":
             profile_message.config(text="Please fill all fields")
         else:
+            profile = {
+                "username": username,
+                "degree": degree,
+                "skills": [s.strip() for s in skills.split(",")],
+                "interest": interest,
+            }
+            os.makedirs("data", exist_ok=True)
+            with open("data/profile.json", "w") as f:
+                json.dump(profile, f, indent=4)
             profile_message.config(text="Profile saved!")
-            print("Degree:", degree)
-            print("Skills:", skills)
-            print("Interest:", interest)
 
     save_button = tk.Button(
         welcome_card, text="Save Profile", font=("Arial", 12, "bold"), width=20,
